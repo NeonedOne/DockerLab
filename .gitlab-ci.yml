@@ -1,0 +1,27 @@
+stages:
+  - build
+  - deploy
+  - cleanup
+
+docker-build:
+  rules:
+    - if: $CI_BUILD_REF_NAME == "master" || $CI_BUILD_REF_NAME == "dev"
+      when: on_success
+    - when: never
+  stage: build
+  interruptible: true
+  script:
+    - docker build . -t app:latest
+
+restart:
+  stage: deploy
+  interruptible: true
+  script:
+    - cd ~/$CI_PROJECT_NAME/
+    - docker-compose up -d
+
+cleanup:
+  stage: cleanup
+  interruptible: true
+  script:
+    - docker rmi --force $(docker images -q --filter "dangling=true") || echo test

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Worst Student</title>
+  </head>
+
+  <p>FIRST TASK</p>
+  <form action="{{ request.path }}" method="post">
+	    ValueLab1:<br>
+        <input type="text" name="InputValue"><br>
+	    <input type="submit" value="SendValue">
+        <div id='info_section'>
+        <p>{{ var }}</p>
+</div>
+     </form>
+  <p>SECOND TASK</p>
+    <table id="demo">
+        <thead>
+		    <tr>
+		    <th>Name</th>
+		    <th>PE</th>
+            <th>Physics</th>
+		    <th>Chemistry</th>
+            <th>Progs</th>
+                <th>sum</th>
+		    </tr>
+	    </thead>
+
+	    <tbody>
+      {% for u in student %}
+      <tr>
+
+        <td>{{ u[1] }}</td>
+        <td>{{ u[2] }}</td>
+        <td>{{ u[3] }}</td>
+        <td>{{ u[4] }}</td>
+        <td>{{ u[5] }}</td>
+        <td>{{ u[6] }}</td>
+      </tr>
+
+      {% endfor %}
+    </table>
+  </tbody>
+  </body>
+</html>
